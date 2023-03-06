@@ -8,7 +8,6 @@ import random
 
 # the following import line will only work if the sorting submodule has been correctly downloaded
 from sorting.sorting import merge_sorted, quick_sorted
-
 if __name__ == '__main__':
 
     # process command line parameters
@@ -19,6 +18,10 @@ if __name__ == '__main__':
     parser.add_argument('--max_x', type=int, default=0)
     parser.add_argument('--input', choices=['sorted', 'random'], default='random')
     args = parser.parse_args()
+
+    #print header variables
+    print('|`Formula`       |   `Timsort`    | `Merge_Sorted` | `Quick_Sorted` |')
+    print('| -------------- | -------------- | -------------- | -------------- |')
 
     # perform the runtime tests
     for x in range(0, args.max_x+1):
@@ -36,7 +39,7 @@ if __name__ == '__main__':
             # and whenever the input list is sorted, timsort will run in time Theta(n) instead of Theta(n log n)
             #
             # your specific task is to make xs be a list of all numbers between 0 and 2**x
-            xs = FIXME
+            xs = list(range(2**x))
 
             # HINT:
             # use the range and list functions
@@ -55,7 +58,11 @@ if __name__ == '__main__':
         # You will have to look up how to do this formatting.
         # In order to get a proper markdown table,
         # you will have to also print a header line somewhere else.
-        print(f'len(xs)=2**{x} runtimes={runtimes}')
+        col = f"`len(xs)=2**{x}`"
+        ret = ""
+        for runtime in runtimes:
+            ret += f"  {runtimes[runtime]:0.2e}  |"
+        print(f'| {col} | {ret}')
 
         # HINT:
         # use f-strings and a print statement that looks something like
